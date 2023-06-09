@@ -192,6 +192,49 @@ func MustMemePicture(ctx *Ctx) bool {
 	}
 }
 
+// HasPicture 检查消息是否存在图片
+func HasPicture(ctx *Ctx) bool {
+	content := ctx.Event.Message.Content
+	if ctx.IsImage() {
+		regex := regexp.MustCompile(`\[pic=(.+?),`)
+		match := regex.FindStringSubmatch(content)
+		if len(match) > 1 {
+			picValue := match[1]
+			ctx.State["image_url"] = picValue
+			return true
+		}
+	}
+	return false
+}
+
+// MustPicture 消息不存在图片阻塞至有图片，默认30s，超时返回false
+// 阻塞时长可通过ctx.State["timeout"]设置
+func MustPicture(ctx *Ctx) bool {
+	if HasPicture(ctx) {
+		return true
+	}
+	var timeout time.Duration
+	if t, ok := ctx.State["timeout"]; ok {
+		if v, ok := t.(time.Duration); !ok {
+			log.Errorf("ctx.State[\"timeout\"] must be time.Duration")
+			return false
+		} else {
+			timeout = v
+		}
+	} else {
+		timeout = 30 * time.Second
+	}
+	ctx.ReplyTextAndAt(fmt.Sprintf("请在%d秒内发送图片", int(timeout.Seconds())))
+	next := NewEventChannel(999, true, ctx.CheckUserSession(), HasPicture).Next()
+	select {
+	case <-time.After(timeout):
+		return false
+	case newCtx := <-next:
+		ctx.State["image_url"] = newCtx.State["image_url"]
+		return true
+	}
+}
+
 // OnlyGroup 只允许群聊使用
 func OnlyGroup(ctx *Ctx) bool {
 	return ctx.IsEventGroupChat()

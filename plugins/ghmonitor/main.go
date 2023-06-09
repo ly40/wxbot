@@ -31,6 +31,7 @@ func init() {
 			"* 监控公众号 (gh_.*) 转发到 (.*)\n" +
 			"* 监控公众号关键词 (.*) 转发到 (.*)",
 		DataFolder: "ghmonitor",
+		HideMenu:   true,
 	})
 
 	if err := sqlite.Open(engine.GetDataFolder()+"/monitor.db", &db); err != nil {

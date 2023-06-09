@@ -34,33 +34,8 @@ type ChatRoom struct {
 
 func init() {
 	engine := control.Register("chatgpt", &control.Options{
-		Alias: "ChatGPT",
-		Help: "指令:\n" +
-			"* @机器人 [内容] -> 进行AI对话，计入上下文\n" +
-			"* @机器人 提问 [问题] -> 单独提问，不计入上下文\n" +
-			"* @机器人 作画 [描述] -> 进行AI作画\n" +
-			"* @机器人 清空会话 -> 可清空与您的上下文\n" +
-			"* @机器人 角色列表 -> 获取可切换的AI角色\n" +
-			"* @机器人 当前角色 -> 获取当前用户的AI角色\n" +
-			"* @机器人 创建角色 [角色名] [角色描述]\n" +
-			"* @机器人 删除角色 [角色名]\n" +
-			"* @机器人 切换角色 [角色名]\n\n" +
-			"*管理员指令(详细说明请看文档):\n" +
-			"* set chatgpt apikey [keys]\n" +
-			"* del chatgpt apikey [keys]\n" +
-			"* set chatgpt model [key=val]\n" +
-			"* reset chatgpt model\n" +
-			"* get chatgpt info\n" +
-			"* set chatgpt proxy [url]\n" +
-			"* del chatgpt proxy\n" +
-			"* set chatgpt http_proxy [url]\n" +
-			"* del chatgpt http_proxy\n" +
-			"* get chatgpt (sensitive|敏感词)\n" +
-			"* set chatgpt (sensitive|敏感词) [敏感词]\n" +
-			"* reset chatgpt (sensitive|敏感词)\n" +
-			"* del chatgpt system (sensitive|敏感词)\n" +
-			"* del chatgpt user (sensitive|敏感词)\n" +
-			"* del chatgpt all (sensitive|敏感词)",
+		Alias:      "♨️ChatGPT",
+		Help:       "指令: /chat 提示词",
 		DataFolder: "chatgpt",
 	})
 
@@ -92,7 +67,8 @@ func init() {
 	setSensitiveCommand(engine)
 
 	// 群聊并且艾特机器人
-	engine.OnMessage(robot.OnlyAtMe).SetBlock(true).SetPriority(9999).Handle(func(ctx *robot.Ctx) {
+	// engine.OnMessage(robot.OnlyAtMe).SetBlock(true).SetPriority(9999).Handle(func(ctx *robot.Ctx) {
+	engine.OnRegex(`^/chat ?(.*?)$`).SetBlock(true).Handle(func(ctx *robot.Ctx) {
 		var (
 			now = time.Now().Local()
 			msg = ctx.MessageString()

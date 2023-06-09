@@ -60,6 +60,7 @@ compress-windows-arm64:
 
 compress-linux-amd64:
 	tar -czvf build/wxbot-linux-amd64.tar.gz -C build/linux-amd64/ wxbot; \
+	cp build/linux-amd64/wxbot ./; \
     rm -rf build/linux-amd64
 
 compress-linux-arm64:

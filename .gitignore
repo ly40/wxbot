@@ -4,4 +4,10 @@
 # Other files
 data
 docker/wxbot.tar
-tests
+app.log
+wxbot.pid
+
+wxbot
+
+build/
+wxbot.exe

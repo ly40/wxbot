@@ -308,6 +308,23 @@ func (f *Framework) AgreeFriendVerify(v1, v2, scene string) error {
 	return nil
 }
 
+// todo 暂不支持，只开发了千寻。因报错而填充的函数
+func (f *Framework) ConfirmTransfer(fromWxId, transferId string) error {
+	payload := map[string]interface{}{
+		"api":        "ConfirmTransfer",
+		"token":      f.ApiToken,
+		"robot_wxid": f.BotWxId,
+		"fromWxid":   fromWxId,
+		"transferid": transferId,
+	}
+
+	if err := NewRequest().Post(f.ApiUrl).SetBody(payload).Do().Err; err != nil {
+		log.Errorf("[VLW] ConfirmTransfer error: %v", err.Error())
+		return err
+	}
+	return nil
+}
+
 func (f *Framework) InviteIntoGroup(groupWxId, wxId string, typ int) error {
 	payload := make(map[string]interface{}, 5)
 	switch typ {

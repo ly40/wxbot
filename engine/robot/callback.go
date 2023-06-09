@@ -121,3 +121,8 @@ func (ctx *Ctx) IsEventFriendVerify() bool {
 func (ctx *Ctx) IsEventSubscription() bool {
 	return ctx.Event.Type == EventMPChat
 }
+
+// IsEventTransfer 判断消息是否是转账消息
+func (ctx *Ctx) IsEventTransfer() bool {
+	return ctx.Event.Type == EventTransfer
+}

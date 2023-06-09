@@ -15,6 +15,7 @@ func init() {
 		Help: "指令:\n" +
 			"* 摸鱼 -> 获取摸鱼办日历\n" +
 			"* 摸鱼日历 -> 获取摸鱼办日历",
+		HideMenu: true,
 	})
 	engine.OnFullMatchGroup([]string{"摸鱼日历", "摸鱼"}).SetBlock(true).Handle(func(ctx *robot.Ctx) {
 		if imageUrl := getMoYuBan(); imageUrl == "" {

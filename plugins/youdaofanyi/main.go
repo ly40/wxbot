@@ -12,10 +12,10 @@ import (
 
 func init() {
 	engine := control.Register("youdaofanyi", &control.Options{
-		Alias: "有道中英文互译",
-		Help: "指令:\n" +
-			"* 翻译 [内容]\n" +
-			"* 有道翻译 [内容]\n",
+		Alias: "➡️有道中英文互译",
+		Help: `指令：
+翻译 [内容]
+有道翻译 [内容]`,
 	})
 
 	engine.OnRegex(`(^有道翻译|^翻译) ?(.*?)$`).SetBlock(true).Handle(func(ctx *robot.Ctx) {

@@ -20,9 +20,8 @@ var (
 
 func init() {
 	engine := control.Register("weather", &control.Options{
-		Alias: "天气查询",
-		Help: "指令:\n" +
-			"* [城市名]天气 -> 获取天气数据，Ps:济南天气、北京-朝阳天气",
+		Alias:      "⛅天气查询",
+		Help:       "指令：[城市名]天气\nPs：济南天气、北京-朝阳天气",
 		DataFolder: "weather",
 	})
 

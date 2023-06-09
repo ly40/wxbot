@@ -12,6 +12,7 @@ func init() {
 		Help: "指令:\n" +
 			"* 抓取Cosplay作品\n" +
 			"* 抓取Coser日常\n",
+		HideMenu: true,
 	})
 
 	storageFolder := localimage.GetStorageFolder()

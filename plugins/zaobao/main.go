@@ -27,11 +27,8 @@ type ZaoBao struct {
 
 func init() {
 	engine := control.Register("zaobao", &control.Options{
-		Alias: "每日早报",
-		Help: "指令:\n" +
-			"* 早报 -> 获取每天60s读懂世界\n" +
-			"* 每日早报 -> 获取每天60s读懂世界\n" +
-			"* 早报定时 -> 专门用于定时任务的指令，请不要手动调用",
+		Alias:      "🌞每日早报",
+		Help:       "指令：早报",
 		DataFolder: "zaobao",
 		OnEnable: func(ctx *robot.Ctx) {
 			// todo 启动将定时任务加入到定时任务列表
@@ -52,7 +49,7 @@ func init() {
 
 	go pollingTask()
 
-	engine.OnFullMatchGroup([]string{"早报", "每日早报"}).SetBlock(true).Handle(func(ctx *robot.Ctx) {
+	engine.OnFullMatchGroup([]string{"早报"}).SetBlock(true).Handle(func(ctx *robot.Ctx) {
 		if zaoBao.Token == "" {
 			ctx.ReplyTextAndAt("请先私聊机器人配置token\n指令：set zaobao token __\n相关秘钥申请地址：https://admin.alapi.cn")
 			return

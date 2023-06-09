@@ -306,6 +306,23 @@ func (f *Framework) AgreeFriendVerify(v3, v4, scene string) error {
 	return nil
 }
 
+func (f *Framework) ConfirmTransfer(fromWxId, transferId string) error {
+	apiUrl := fmt.Sprintf("%s/DaenWxHook/httpapi/?wxid=%s", f.ApiUrl, f.BotWxId)
+	payload := map[string]interface{}{
+		"type": "Q0016",
+		"data": map[string]interface{}{
+			"wxid":       fromWxId,
+			"transferid": transferId,
+		},
+	}
+
+	if err := NewRequest().Post(apiUrl).SetBody(payload).Do().Err; err != nil {
+		log.Errorf("[千寻] ConfirmTransfer error: %v", err.Error())
+		return err
+	}
+	return nil
+}
+
 func (f *Framework) InviteIntoGroup(groupWxId, wxId string, typ int) error {
 	apiUrl := fmt.Sprintf("%s/DaenWxHook/httpapi/?wxid=%s", f.ApiUrl, f.BotWxId)
 	payload := map[string]interface{}{

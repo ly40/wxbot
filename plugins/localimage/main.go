@@ -34,6 +34,7 @@ func init() {
 			"* [目录名称]\n" +
 			"* [目录名称] [数量]\n",
 		DataFolder: "localimage",
+		HideMenu:   true,
 	})
 
 	storageFolder = engine.GetCacheFolder()

@@ -26,6 +26,7 @@ func init() {
 			"指令:\n" +
 			"* 表情原图 -> 30s内发送表情包获取表情原图",
 		DataFolder: "memepicture",
+		HideMenu:   true,
 	})
 
 	engine.OnFullMatch("表情原图", robot.MustMemePicture).SetBlock(true).Handle(func(ctx *robot.Ctx) {
@@ -37,7 +38,7 @@ func init() {
 		}
 
 		switch ctx.Bot.GetConfig().Framework.Name {
-		case "千寻", "qianxun", "Dean":
+		case "千寻", "qianxun":
 			original, thumbnail, err := featureImage(imageUrl, "", engine.GetCacheFolder())
 			if err != nil {
 				log.Errorf("获取表情原图失败: %v", err)

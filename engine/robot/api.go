@@ -119,6 +119,11 @@ type IFramework interface {
 	// scene: 验证场景
 	AgreeFriendVerify(v3, v4, scene string) error
 
+	// ConfirmTransfer 确认收款
+	// fromwWxId: 好友id
+	// transferId: 转账金额
+	ConfirmTransfer(fromwWxId, transferId string) error
+
 	// InviteIntoGroup 邀请好友加入群组
 	// groupWxId: 群ID
 	// wxId: 好友ID
@@ -424,6 +429,13 @@ func (ctx *Ctx) AgreeFriendVerify(v3, v4, scene string) error {
 	ctx.mutex.Lock()
 	defer ctx.mutex.Unlock()
 	return ctx.framework.AgreeFriendVerify(v3, v4, scene)
+}
+
+// ConfirmTransfer 确认收款
+func (ctx *Ctx) ConfirmTransfer(fromWxId, transferId string) error {
+	ctx.mutex.Lock()
+	defer ctx.mutex.Unlock()
+	return ctx.framework.ConfirmTransfer(fromWxId, transferId)
 }
 
 // InviteIntoGroup 邀请好友加入群组; typ:1-直接拉，2-发送邀请链接

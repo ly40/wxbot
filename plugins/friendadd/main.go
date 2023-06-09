@@ -10,7 +10,8 @@ import (
 
 func init() {
 	engine := control.Register("friendadd", &control.Options{
-		Alias: "自动通过好友添加请求",
+		Alias:    "自动通过好友添加请求",
+		HideMenu: true,
 	})
 
 	engine.OnMessage().SetBlock(false).Handle(func(ctx *robot.Ctx) {

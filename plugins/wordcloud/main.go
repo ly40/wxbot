@@ -27,6 +27,7 @@ func init() {
 			"* 热词 id [xxx] top [10] -> 获取指定聊天室热词前10条\n" +
 			"* 引用群里某个人消息并回复 热词，获取该用户在群里的热词",
 		DataFolder: "wordcloud",
+		HideMenu:   true,
 	})
 
 	engine.OnRegex(`^热词(?:\s+id\s+(\S+))?(?:\s+top\s+(\d+))?$|^热词\s+top\s+(\d+)$`).SetBlock(true).Handle(func(ctx *robot.Ctx) {

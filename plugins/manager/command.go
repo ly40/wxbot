@@ -21,6 +21,7 @@ func registerCommand() {
 			"仅限机器人管理员\n\n" +
 			"指令:\n" +
 			"* 设置菜单模式[1|2] -> 默认为模式1文本输出，模式2为网页输出(需要配置公网地址)",
+		HideMenu: true,
 	})
 
 	if err := db.CreateAndFirstOrCreate("command", &command); err != nil {
@@ -38,7 +39,7 @@ func registerCommand() {
 	})
 
 	// 菜单输出
-	engine.OnFullMatchGroup([]string{"menu", "菜单"}).SetBlock(true).Handle(func(ctx *robot.Ctx) {
+	engine.OnFullMatchGroup([]string{"menu", "菜单", "help", "帮助"}).SetBlock(true).Handle(func(ctx *robot.Ctx) {
 		c := ctx.State["manager"].(*control.Control)
 		options := MenuOptions{WxId: ctx.Event.FromUniqueID}
 		for _, m := range c.Manager.M {
@@ -71,12 +72,11 @@ func registerCommand() {
 			// 🔔实现方案一(默认方案)：直接输出菜单
 			menus := "当前支持的功能有: \n"
 			for i := range options.Menus {
-				menu := ""
-				menu += "服务名: %s\n"
-				menu += "别称: %s\n"
-				menu += "默认开启状态: %v\n"
-				menu += "当前开启状态: %v\n\n"
-				menus += fmt.Sprintf(menu, options.Menus[i].Name, options.Menus[i].Alias, options.Menus[i].DefStatus, options.Menus[i].CurStatus)
+				menu := `
+名称：%s
+%v
+`
+				menus += fmt.Sprintf(menu, options.Menus[i].Alias, options.Menus[i].Describe)
 			}
 			ctx.ReplyTextAndAt(menus)
 		case "2":

@@ -60,6 +60,7 @@ func registerCronjob() {
 			"* 删除任务 [任务ID]\n" +
 			"* 删除全部任务\n",
 		DataFolder: "manager",
+		HideMenu:   true,
 	})
 	if err := db.Create("cronjob", &CronJob{}); err != nil {
 		log.Fatalf("create cronjob table failed: %v", err)

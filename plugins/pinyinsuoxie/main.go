@@ -18,6 +18,7 @@ func init() {
 			"奇奇怪怪的拼音缩写咱也不知道啥意思啊，快来查一查\n\n" +
 			"指令:\n" +
 			"* 查缩写 [内容] -> 获取拼音缩写翻译，Ps:查缩写 yyds",
+		HideMenu: true,
 	})
 	engine.OnRegex(`^查缩写 ?([a-zA-Z0-9]+)$`).SetBlock(true).Handle(func(ctx *robot.Ctx) {
 		word := ctx.State["regex_matched"].([]string)[1]

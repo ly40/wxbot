@@ -22,6 +22,7 @@ func init() {
 		Help: "指令:\n" +
 			"* 漂亮妹妹 -> 获取漂亮妹妹",
 		DataFolder: "plmm",
+		HideMenu:   true,
 	})
 
 	if err := sqlite.Open(engine.GetDataFolder()+"/plmm.db", &db); err != nil {

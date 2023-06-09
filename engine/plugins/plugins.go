@@ -7,6 +7,9 @@ import (
 	// 百度百科
 	_ "github.com/yqchilde/wxbot/plugins/baidubaike"
 
+	// MidJourney
+	_ "github.com/yqchilde/wxbot/plugins/midjourney"
+
 	// 肯德基疯狂星期四骚话
 	_ "github.com/yqchilde/wxbot/plugins/crazykfc"
 
@@ -46,6 +49,9 @@ import (
 	// 自动加好友
 	_ "github.com/yqchilde/wxbot/plugins/friendadd"
 
+	// 自动转账
+	_ "github.com/yqchilde/wxbot/plugins/transferconfirm"
+
 	// 选择困难症帮手
 	_ "github.com/yqchilde/wxbot/plugins/choose"
 
@@ -54,6 +60,18 @@ import (
 
 	// 爬取图片到本地
 	_ "github.com/yqchilde/wxbot/plugins/localimagespider"
+
+	// 自动抠图
+	_ "github.com/yqchilde/wxbot/plugins/bgremover"
+
+	// OCR文字识别
+	_ "github.com/yqchilde/wxbot/plugins/ocr"
+
+	// 油价查询
+	_ "github.com/yqchilde/wxbot/plugins/oilprice"
+
+	// 查字典
+	_ "github.com/yqchilde/wxbot/plugins/word"
 
 	// ChatGPT聊天，优先级必须放到最低
 	_ "github.com/yqchilde/wxbot/plugins/chatgpt"
